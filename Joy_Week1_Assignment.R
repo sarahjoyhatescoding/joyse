@@ -51,9 +51,16 @@ df.r
 
 # Export the data frame as a .csv file [2 points]
 
-write.csv(df.r,file = "assignment.csv")
+write.csv(df.r,file = "joy_week1_assignment.csv")
 
 # Generate summary statistics of your data frame and copy them as text into your script under a new section heading. [2 points]
+
+summary(df.r)
+
+####    three             ordered            repeats            decimals        
+####Length:16          Length:16          Length:16          Length:16         
+####Class :character   Class :character   Class :character   Class :character  
+####Mode  :character   Mode  :character   Mode  :character   Mode  :character  
 
 # Push your script and your .csv file to GitHub in a new "Week1" folder. [3 points]
 
