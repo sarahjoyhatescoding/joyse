@@ -57,6 +57,7 @@ write.csv(df.r,file = "joy_week1_assignment.csv")
 
 summary(df.r)
 
+
 ####    three             ordered            repeats            decimals        
 ####Length:16          Length:16          Length:16          Length:16         
 ####Class :character   Class :character   Class :character   Class :character  
