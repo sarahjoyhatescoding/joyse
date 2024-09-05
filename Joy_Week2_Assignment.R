@@ -78,15 +78,30 @@ setwd("C:/GitHub/joyse/plots")
 
 getwd()
 
+
+
+
+
+
 # Create a scatter plot between two of your numeric columns. (10 points)
 
 plot(df.b$ordered ~ df.b$repeats)
 
   # Change the point shape and color to something NOT used in the example.
 ?pch
+
+plot(df.b$ordered ~ df.b$repeats, xlab = "Explanatory", ylab = "Response", main = "Scatterplot", 
+     cex.axis=0.75, cex.main = 0.75, cex.lab = 0.75, pch=10, col="firebrick4")
+
   # Change the x and y labels and add a title
-plot(df.b$ordered ~ df.b$repeats, xlab = "Explanatory", ylab = "Response", main = "Scatterplot")
+
+plot(df.b$ordered ~ df.b$repeats, xlab = "Explanatory", ylab = "Response", main = "Scatterplot", 
+     cex.axis=0.75, cex.main = 0.75, cex.lab = 0.75, pch=10, col="firebrick4")
   # Export the plot as a JPEG by using the "Export" button in the plotting pane.
+
+getwd()
+setwd("C:/GitHub/joyse/plots")
+
 
 # Upload both plots with the script used to create them to GitHub. (5 points)
   # Follow the same file naming format as last week for the script.
