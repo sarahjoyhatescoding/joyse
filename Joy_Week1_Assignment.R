@@ -41,8 +41,9 @@ df.b
 
 # Add 1 row with unique numeric values to the data frame.[2 points]
 
-hate<- data.frame('I','hate','this','sm')
+hate<- data.frame('I','hate','this','sm')#But, but, but...
 hate
+#supposed to be numeric values...
 
 colnames(hate) <- colnames(df.b)
 df.r <- rbind(df.b,hate)
@@ -64,5 +65,5 @@ summary(df.r)
 ####Mode  :character   Mode  :character   Mode  :character   Mode  :character  
 
 # Push your script and your .csv file to GitHub in a new "Week1" folder. [3 points]
-
+#Forgot to make the new folder
 
