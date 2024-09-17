@@ -33,6 +33,21 @@ runGitHub(username="cjbattey",repo="driftR")
     # Find a package that will generate standard diversity metrics for community ecology, specifically Simpson's Diversity Index.
     # Copy-paste into your script - and run - an example from the reference manual for a function to calculate Simpson's diversity. 
         # Depending on the example usage of the function, either upload a plot of the result or use print() and copy/paste the console output into your script.
+
+install.packages('vegan',
+                 repos = c('https://vegandevs.r-universe.dev','https://cloud.r-project.org'))
+
+data(package = "vegan") ## names of data sets in the package
+data(dune) # Vegetation and Environment in Dutch Dune Meadows
+str(dune) #a data frame of observations of 30 species at 20 sites
+
+diversity(dune,index = "simpson") # calculate Simpson's 1-D Index of Diversity for each site. # closer to 1 = greater diversity
+
+simpson <- diversity(dune, "simpson") # or assign to var.
+simpson 
+hist(simpson)
+
+
     # After running the function example, modify your script to generate another diversity metric that is NOT part of the example. 
         # If there are multiple diversity metrics in the example script, none of these will count as the modified script.
         # Hint: If the function can "only" calculate Simpson's diversity, the inverse of Simpson's diversity is another common metric. 
