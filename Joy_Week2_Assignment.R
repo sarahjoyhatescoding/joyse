@@ -70,7 +70,7 @@ barplot(df.mean$Mean, names.arg = df.mean$Factor, ylim = c(0,5), horiz = TRUE)
 
 b.plot <- barplot(df.mean$Mean, names.arg = df.mean$Factor, ylim = c(0,20),xlab = "Explanatory", ylab = "Response", main="BAR PLOT")
 
-
+#missing the pdf export, and dimensions are backward
 
   # Export the plot as a PDF that is 4 inches wide and 7 inches tall.
 
@@ -98,7 +98,7 @@ plot(df.b$ordered ~ df.b$repeats, xlab = "Explanatory", ylab = "Response", main 
 plot(df.b$ordered ~ df.b$repeats, xlab = "Explanatory", ylab = "Response", main = "Scatterplot", 
      cex.axis=0.75, cex.main = 0.75, cex.lab = 0.75, pch=10, col="firebrick4")
   # Export the plot as a JPEG by using the "Export" button in the plotting pane.
-
+#forgot to change x and y
 getwd()
 setwd("C:/GitHub/joyse/plots")
 

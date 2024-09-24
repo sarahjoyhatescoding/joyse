@@ -21,6 +21,7 @@ runGitHub(username="cjbattey",repo="driftR")
         # Depending on the function, either upload a plot of the result or use print() and copy/paste the console output into your script.
     # After running the function example, manipulate a parameter within the function to create a new result.
 #HEY MATT, remember me, i did it shiny way
+#thank you for this reminder!
         # Common options might be allele frequency, population size, fitness level, etc. 
         # Add the results of this manipulation to your script (if in the console) or upload the new plot.
        
@@ -45,8 +46,8 @@ diversity(dune,index = "simpson") # calculate Simpson's 1-D Index of Diversity f
 
 simpson <- diversity(dune, "simpson") # or assign to var.
 simpson 
-hist(simpson)
-
+hist(simpson)#This line doesn't work. Which column are you using?
+#Also, where's the modified example? I can tell you did it from your plots, but it's not in the code.
 
     # After running the function example, modify your script to generate another diversity metric that is NOT part of the example. 
         # If there are multiple diversity metrics in the example script, none of these will count as the modified script.
