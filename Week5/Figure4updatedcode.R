@@ -122,8 +122,7 @@ ggsave(filename=paste("C:/GitHub/joyse/Week5/Figure4Data.csv",
 
 install.packages("fitdistrplus")
 library(fitdistrplus)
-fitdist("data$Num.Cells.Progeny")
-gofstat(list(fit.1, fit.2, fit.3, etc), chisqbreaks=c(1,2,4,8,16,32,64))
+
 
 
 
