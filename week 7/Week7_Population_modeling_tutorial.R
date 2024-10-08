@@ -1,4 +1,5 @@
 # Population growth over time in isolation ####
+install.packages("growthrates")
 library("growthrates")
 
 # This is an example dataset from the growthrates package.

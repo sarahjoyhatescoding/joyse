@@ -1,7 +1,13 @@
+#@'s refer to slots, whereas $'s refer to columns
+
 # Load the "anytime" and "ggplot2" packages to complete this week's assignment.
+install.packages("anytime")
+install.packages("ggplot2")
 
 # Read the "Plankton_move_average" CSV in from GitHub. 
 # These are data from the Great Lakes Environmental Research Laboratory plankton sampling.
+setwd("C:/GitHub/joyse/week 7")
+read.csv("C:/GitHub/joyse/week 7/Plankton_move_average")
 
 #Used the following lines to format the date and remove NAs from the dataset:
 data$Date <- as.Date(data$Date, origin = "0001-01-01") # Setting values to "day zero".
