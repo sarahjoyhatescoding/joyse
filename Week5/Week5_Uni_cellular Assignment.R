@@ -1,7 +1,7 @@
 # First, recreate Figure 4 from Herron et al. (2019). De novo origins of multicellularity in response to predation. Scientific reports.
   # Search datadryad.org by the paper title and download the dataset. It will include .csv files and R scripts, organized by figure.
   # Save the script and change the working directory on lines 8 and 115 to match your computer
-  # Upload the plot you've created to GitHub. (4 points)
+  # Upload the plot you've created to GitHub. (4 points) #What's with the csv name?
   # Zoom into your plot to look at the distribution for different strains.
 
 # Do all of the strains in the plot have the same distributions (yes/no)? (1 pt)
@@ -9,11 +9,12 @@
 
 # Based on these observations of your strain distributions, why did the authors use a Kruskal-Wallis test rather than ANOVA to compare the strains? (3 pts)
 #they might decide to use a Kruskal-Wallis test to make the data easier to interpret and becuase ANOVA is typically used when data is normally distributed
+#Because they *can't* use an ANOVA on these data.
 
 # Use the fitdist() and gofstat() functions to compare the poisson, negative binomial, and logistic distributions for:
 
 getwd()
-data <- read.csv(file=("C:/Users/13216/OneDrive - Susquehanna University/Desktop/joyse/Week5/Figure4Data.csv"))
+data <- read.csv(file=("C:/Users/13216/OneDrive - Susquehanna University/Desktop/joyse/Week5/Figure4Data.csv"))#use your github repo.
 
 
 install.packages("fitdistrplus")
@@ -36,7 +37,7 @@ ofstat(list(cfnb, cfpn, cfld), chisqbreaks=c(1,2,4,8,16,32,64), fitnames=c("nbin
 
 gofstat(list(tfnb, tfpn, tfld), chisqbreaks=c(1,2,4,8,16,32,64), fitnames=c("nbinom","pois","logis"))
 
-
+#No cheating - If I catch this again it's a zero.
 
 
   # (1) - The number of cells of progeny (data$Num.Cells.Progeny)
