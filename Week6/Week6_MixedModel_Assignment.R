@@ -1,7 +1,7 @@
 # Read in the "Toscano_Griffen_Data.csv" data from GitHub and load the three packages we used in the tutorial this week.
 # The paper these data came from is uploaded to Canvas as "Toscano&Griffen_2014_JAE..."
 
-setwd("C:/Users/13216/OneDrive - Susquehanna University/Desktop/joyse/Week6")
+setwd("C:/Users/13216/OneDrive - Susquehanna University/Desktop/joyse/Week6")#Read from github!
 df <- read.csv("Toscano_Griffen_Data.csv")
 
 install.packages("MASS")
@@ -31,9 +31,10 @@ summary(glmm.interactive)
 
 # (Q1) - The code I've provided in line 13 above is performing two operations at once. What are they? (2 pts)
 # the functions added a new column to th data while simulataneously comparing some of the data points to others via intactive functions
-
+#First part is right, not sure what you mean by the second part.
 # (Q2) - Did the interactive effect change which variables predict proportional consumption? How, SPECIFICALLY, did the results change? (5 pts)
 #Yes they did, additive had a signficant difference as repsentative by their p value, whereas interactive did not.
+#...Notice how specifically is in all caps?
 
 # (Q3) - Plot the residuals of both models. Do you think either model is a good fit? Why or why not? (3 pts)
 plot(glmm.additive)
@@ -55,7 +56,7 @@ AIC(gam.interactive)
 
 # (Q5) - Based on the residuals of your generalized additive models, how confident are you in these results? (2 pts)
 #not very, because they don't seem very random, and they don't have any signifcat values except for their intercept
-
+#What do you mean by significant values in a residual plot, and where are the plots?
 
 
 
