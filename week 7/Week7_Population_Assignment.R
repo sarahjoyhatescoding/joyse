@@ -4,10 +4,13 @@
 install.packages("anytime")
 install.packages("ggplot2")
 
+library("anytime")
+library("ggplot2")
+
 # Read the "Plankton_move_average" CSV in from GitHub. 
 # These are data from the Great Lakes Environmental Research Laboratory plankton sampling.
-setwd("C:/GitHub/joyse/week 7")
-read.csv("C:/GitHub/joyse/week 7/Plankton_move_average")
+setwd("C:/Users/13216/OneDrive - Susquehanna University/Desktop/joyse/week 7")
+data <-read.csv("C:/Users/13216/OneDrive - Susquehanna University/Desktop/joyse/week 7/Plankton_move_average.csv")
 
 #Used the following lines to format the date and remove NAs from the dataset:
 data$Date <- as.Date(data$Date, origin = "0001-01-01") # Setting values to "day zero".
@@ -23,11 +26,17 @@ ggplot(data)  +
   theme_bw() 
 
 # Export this plot to have on hand for reference in the next section of the assignment (and upload with your script). (8 pts)
+#done
 
 # (1) - Which species is most likely to be r-selected prey and which its primary predator? (2 pts)
+#both sexes of the Limncalanus are the r selected prey as they cause the D.mendotae to react to their spikes in movement
 # What is one relationship the third species MIGHT have to the first two? (2 pts)
+#the third species, Bythotrephes, are relatively stable in their movement but seem to have a reactive response to when the D.mendotae have a spike in their movement, perhaps they are scavengers
+#picking up the bits from when D.mendotae feeds on Limncalanus, which causes them to have a rise in movement as more of their food is available. i know very little about plankton 
 
 #Now copy/paste in the Lotka-Volterra function, plotting script, and load the "deSolve" package from the tutorial:
+#install.packages("deSolve")
+#packages("deSolve")
 
 # (2) - What do alpha, beta, gamma, and delta represent in this function? (4 pts)
 
