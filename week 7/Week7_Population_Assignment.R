@@ -29,16 +29,37 @@ ggplot(data)  +
 #done
 
 # (1) - Which species is most likely to be r-selected prey and which its primary predator? (2 pts)
-#both sexes of the Limncalanus are the r selected prey as they cause the D.mendotae to react to their spikes in movement
+  #both sexes of the Limncalanus are the r selected prey as they cause the D.mendotae to react to their spikes in movement
 # What is one relationship the third species MIGHT have to the first two? (2 pts)
-#the third species, Bythotrephes, are relatively stable in their movement but seem to have a reactive response to when the D.mendotae have a spike in their movement, perhaps they are scavengers
-#picking up the bits from when D.mendotae feeds on Limncalanus, which causes them to have a rise in movement as more of their food is available. i know very little about plankton 
+  #the third species, Bythotrephes, are relatively stable in their movement but seem to have a reactive response to when the D.mendotae have a spike in their movement, perhaps they are scavengers
+  #picking up the bits from when D.mendotae feeds on Limncalanus, which causes them to have a rise in movement as more of their food is available. i know very little about plankton 
 
 #Now copy/paste in the Lotka-Volterra function, plotting script, and load the "deSolve" package from the tutorial:
-#install.packages("deSolve")
-#packages("deSolve")
+install.packages("deSolve")
+
+dev.off()
+
+LotVmod <- function (Time, State, Pars) {
+  with(as.list(c(State, Pars)), {
+    dx = x*(alpha - beta*y)
+    dy = -y*(gamma - delta*x)
+    return(list(c(dx, dy)))
+  })
+}
+
+Pars <- c(alpha = 2, beta = 0.5, gamma = .2, delta = .6) #This is the line we will change
+State <- c(x = 10, y = 10)#For now keep this the same.
+Time <- seq(0, 100, by = 1)#For now keep this the same.
+out <- as.data.frame(ode(func = LotVmod, y = State, parms = Pars, times = Time))
+
+
+
 
 # (2) - What do alpha, beta, gamma, and delta represent in this function? (4 pts)
+  #alpha represents growth rate of the prey population
+  #beta represents the rate at which predators consume their prey
+  #gamma represents the death rate of the predator population when there is a lack of prey
+  #delta represents the rate at which the predator population increases as they consume more prey
 
 # (3) - By only changing values for alpha, beta, gamma, and/or delta
 # change the default parameters of the L-V model to best approximate the relationship between Limncalanus and D.mendotae, assuming both plots are on the same time scale.
