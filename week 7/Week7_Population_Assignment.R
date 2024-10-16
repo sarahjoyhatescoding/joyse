@@ -9,8 +9,8 @@ library("ggplot2")
 
 # Read the "Plankton_move_average" CSV in from GitHub. 
 # These are data from the Great Lakes Environmental Research Laboratory plankton sampling.
-setwd("C:/Users/13216/OneDrive - Susquehanna University/Desktop/joyse/week 7")
-data <-read.csv("C:/Users/13216/OneDrive - Susquehanna University/Desktop/joyse/week 7/Plankton_move_average.csv")
+setwd("C:/GitHub/joyse/week 7")
+data <-read.csv("C:/GitHub/joyse/week 7/Plankton_move_average.csv")
 
 #Used the following lines to format the date and remove NAs from the dataset:
 data$Date <- as.Date(data$Date, origin = "0001-01-01") # Setting values to "day zero".
@@ -35,9 +35,8 @@ ggplot(data)  +
   #picking up the bits from when D.mendotae feeds on Limncalanus, which causes them to have a rise in movement as more of their food is available. i know very little about plankton 
 
 #Now copy/paste in the Lotka-Volterra function, plotting script, and load the "deSolve" package from the tutorial:
-install.packages("deSolve")
+library("deSolve")
 
-dev.off()
 
 LotVmod <- function (Time, State, Pars) {
   with(as.list(c(State, Pars)), {
@@ -47,12 +46,19 @@ LotVmod <- function (Time, State, Pars) {
   })
 }
 
-Pars <- c(alpha = 2, beta = 0.5, gamma = .2, delta = .6) #This is the line we will change
+Pars <- c(alpha = 2, beta = 0.5, gamma = .2, delta = .6)
+
+Pars <- c(alpha = 4, beta = 1, gamma = .4, delta = 1.2) 
+
+Pars <- c(alpha = 2, beta = 0.5, gamma = .8, delta = 2.4) 
+
 State <- c(x = 10, y = 10)#For now keep this the same.
 Time <- seq(0, 100, by = 1)#For now keep this the same.
 out <- as.data.frame(ode(func = LotVmod, y = State, parms = Pars, times = Time))
 
 
+matplot(out[,-1], type = "l", xlab = "time", ylab = "population")
+legend("topright", c("Limncalanus", "D.mendotae"), lty = c(1,2), col = c(1,2), box.lwd = 0)
 
 
 # (2) - What do alpha, beta, gamma, and delta represent in this function? (4 pts)
@@ -64,7 +70,13 @@ out <- as.data.frame(ode(func = LotVmod, y = State, parms = Pars, times = Time))
 # (3) - By only changing values for alpha, beta, gamma, and/or delta
 # change the default parameters of the L-V model to best approximate the relationship between Limncalanus and D.mendotae, assuming both plots are on the same time scale.
 # What are the changes you've made to alpha, beta, gamma, and delta from the default values; and what do they say in a relative sense about the plankton data? (4 pts)
-# Are there other paramenter changes that could have created the same end result? (2 pts)
+  #I've altered the original rates of alpha, beta, gamma and delta by doubling the parameters set in the tutorial. I've noticed that this has caused
+  #there to be more peaks and valleys present in the predator prey dynamic within the same time frame, meaning both sets of parameters balance out the same,
+  #with a more variable environment causing these frequent checks and balances systems to play out
+# Are there other parameter changes that could have created the same end result? (2 pts)
+  #since i doubled the original data, i had reverted my par line of code back to that of the tutorial. since alpha is related to delta, i quadrupled the delta coefficient while keeping alpha 
+  #at its original value, thus making them both average out to being relatively double of what the original line of code once was.
+  #I did the same thing for beta and gamma, kept beta the same as the original code, quadrupled gamma and got relatively the smae kind of graph i was looking for.
 # Export your final L-V plot with a legend that includes the appropriate genus and/or species name as if the model results were the real plankton data, 
 # and upload with your script. (hint - remember which one is the predator and which is the prey) (8 pts)
 
