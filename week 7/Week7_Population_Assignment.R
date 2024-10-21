@@ -33,7 +33,7 @@ ggplot(data)  +
 # What is one relationship the third species MIGHT have to the first two? (2 pts)
   #the third species, Bythotrephes, are relatively stable in their movement but seem to have a reactive response to when the D.mendotae have a spike in their movement, perhaps they are scavengers
   #picking up the bits from when D.mendotae feeds on Limncalanus, which causes them to have a rise in movement as more of their food is available. i know very little about plankton 
-
+  #Bythotrephes is the predator and the other two are competing. 
 #Now copy/paste in the Lotka-Volterra function, plotting script, and load the "deSolve" package from the tutorial:
 library("deSolve")
 
