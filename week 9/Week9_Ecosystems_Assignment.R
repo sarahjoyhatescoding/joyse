@@ -5,12 +5,33 @@
     # Explain the ecological importance of your significant predictor variables, or the importance if none are significant for your community.
 
 library(readxl)
+library(vegan)
 
 setwd("C:/GitHub/joyse/week 9")
 
     # First, read in the abiotic data:
     # Make sure the excel file is NOT open on your computer or it will generate an error (unlike read.csv)
-abiotic.tibble <- read_excel(_____)
+abiotic.tibble <- read_excel("Penaetal_2016_data.xlsx", sheet = "Abiotic factors")
+abiotic <- as.data.frame(abiotic.tibble)
+
+veg_trans.tibble <- read_excel("Penaetal_2016_data.xlsx", sheet ="vegetation_transects")
+veg_trans <- as.data.frame(veg_trans.tibble)
+head(veg_trans)
+
+abiotic$names <- paste(abiotic$Parcel, abiotic$Land_Use)
+head(abiotic)
+
+
+veg_trans$names <- paste(veg_trans$Parcel, veg_trans$Landuse)
+abiotic.means <- aggregate(x= abiotic, by = list(abiotic$names), FUN ="mean")
+head(abiotic.means)
+
+veg_trans.means <- aggregate(x=veg_trans, by = list(veg_trans$names), FUN =  "mean")
+
+AGH <- merge(abiotic, veg_trans, by="names")
+
+ord <- rda(pookie [,18:54] ~ pH + totalN = Perc_ash + Kalium +Magnesium + Ca + Al + TotalP +OlsenP, AGH)
+ord
 
 
 
