@@ -217,5 +217,15 @@ plot_smooth(gam.mod, view="Alk", rm.ranef=FALSE, ylab = "", xlab = "Specific Con
 
 #4: For your final project you'll need to find two separate data sources to combine similar to the process here.
   #In prep for that, find one data source to compare with either the data in dbfishR OR DataRetrieval. (5 pts)
+
+getwd()
+
+read.csv("Population_Genetics_Wild_Brook_Trout_North_Carolina_1998_2016 (1).csv")
+new.df<- df [,c("Latitude", "Longitude", "Ne")]
+colnames(new.df) <- c("SiteLat", "SiteLon", "TotalCount")
+
+
+#rbind somewhere
+
   #Read data from that source into your script. (5 pts)
   #Create any analysis of your choice that combines the two data sources, this can be as simple as a linear model. (5 pts)
