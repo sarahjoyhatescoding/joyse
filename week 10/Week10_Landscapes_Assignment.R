@@ -33,7 +33,6 @@ all_brookies$YOYRatio[is.na(all_brookies$YOYRatio)] <- 1 #NAs are 100% YOY.
 
 brookie_events <- merge(all_brookies, events_meta)
 
-
 library(dataRetrieval)
 
 HUC6 <- "020501"#North Branch Susquehanna
@@ -219,13 +218,26 @@ plot_smooth(gam.mod, view="Alk", rm.ranef=FALSE, ylab = "", xlab = "Specific Con
   #In prep for that, find one data source to compare with either the data in dbfishR OR DataRetrieval. (5 pts)
 
 getwd()
+setwd("C:/Users/13216/OneDrive - Susquehanna University/Desktop/joyse/week 10")
 
 read.csv("Population_Genetics_Wild_Brook_Trout_North_Carolina_1998_2016 (1).csv")
-new.df<- df [,c("Latitude", "Longitude", "Ne")]
-colnames(new.df) <- c("SiteLat", "SiteLon", "TotalCount")
+
+Evil.tibble<-read.csv("Population_Genetics_Wild_Brook_Trout_North_Carolina_1998_2016 (1).csv")
+Evil <- as.data.frame(Evil.tibble)
+
+colnames(Evil)[colnames(Evil) == "Latitude"] <- "SiteLat"
+colnames(Evil)[colnames(Evil) == "Ne"] <- "TotalCount"
+
+newstuff<- merge(brookie_events, Evil, by = c("SiteLat", "TotalCount"))
+
+newmod <- lm(TotalCount~SiteLat, data = newstuff)
+
+summary(newmod)
 
 
-#rbind somewhere
+
+
+brookie_events <- aggregate (EventCode~ID, SiteLat, data = subset(fish_rec , Species =="Brook Trout" & Pass == "Pass 1"), FUN = length)
 
   #Read data from that source into your script. (5 pts)
   #Create any analysis of your choice that combines the two data sources, this can be as simple as a linear model. (5 pts)
