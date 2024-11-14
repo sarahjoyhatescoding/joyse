@@ -1,0 +1,44 @@
+Area,Area_Year,n_ at_risk,n_ avy_morts,Mortality_avy
+Baranof,2010,12,0,0
+Baranof,2011,18,0,0
+Baranof,2012,23,1,0.048
+Baranof,2013,27,2,0.08
+Baranof,2014,29,2,0.071
+Baranof,2015,27,2,0.082
+Baranof,2016,36,5,0.161
+Baranof,2017,32,5,0.167
+Baranof,2018,31,1,0.037
+Baranof,2019,32,7,0.229
+Baranof,2020,34,3,0.099
+Cleveland,2009,7,0,0
+Cleveland,2010,12,1,0.083
+Cleveland,2011,10,1,0.1
+Cleveland,2012,8,0,0
+Cleveland,2013,7,0,0
+Klukwan,2010,23,4,0.196
+Klukwan,2011,26,3,0.125
+Klukwan,2012,29,2,0.07
+Klukwan,2013,34,2,0.061
+Klukwan,2014,35,1,0.029
+Klukwan,2015,34,1,0.036
+Klukwan,2016,26,4,0.172
+Klukwan,2017,23,0,0
+Klukwan,2018,26,2,0.083
+Klukwan,2019,32,3,0.107
+Klukwan,2020,39,4,0.122
+Lynn Canal,2005,22,1,0.048
+Lynn Canal,2006,58,1,0.021
+Lynn Canal,2007,67,2,0.043
+Lynn Canal,2008,70,1,0.026
+Lynn Canal,2009,54,4,0.076
+Lynn Canal,2010,49,0,0
+Lynn Canal,2011,46,2,0.065
+Lynn Canal,2012,34,6,0.194
+Lynn Canal,2013,25,1,0.048
+Lynn Canal,2014,26,2,0.079
+Lynn Canal,2015,26,0,0
+Lynn Canal,2016,31,4,0.138
+Lynn Canal,2017,30,3,0.111
+Lynn Canal,2018,28,0,0
+Lynn Canal,2019,30,2,0.07
+Lynn Canal,2020,25,1,0.043
