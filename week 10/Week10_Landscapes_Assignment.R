@@ -228,12 +228,19 @@ Evil <- as.data.frame(Evil.tibble)
 colnames(Evil)[colnames(Evil) == "Latitude"] <- "SiteLat"
 colnames(Evil)[colnames(Evil) == "Ne"] <- "TotalCount"
 
-newstuff<- merge(brookie_events, Evil, by = c("SiteLat", "TotalCount"))
+#newstuff<- merge(brookie_events, Evil, by = c("SiteLat", "TotalCount"))
 
-newmod <- lm(TotalCount~SiteLat, data = newstuff)
+brookies_short <- brookie_events[,c("SiteLat", "TotalCount")]
+Evil_short <- Evil[,c("SiteLat", "TotalCount")]
+
+the_things <- rbind(brookies_short,Evil_short)
+
+
+newmod <- lm(TotalCount~SiteLat, data = the_things)
 
 summary(newmod)
 
+plot(TotalCount~SiteLat, data = the_things, ylim=c(0,300))
 
 
 
