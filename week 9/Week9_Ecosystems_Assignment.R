@@ -36,7 +36,7 @@ AGH <- merge(abiotic, veg_trans, by="names")
 ord <- rda(AGH [,18:54] ~ pH + totalN + Perc_ash + Kalium +Magnesium + Ca + Al + TotalP +OlsenP, AGH)
 ord
 
-
+#Significance test?
 
 
 
@@ -45,7 +45,7 @@ ord
   # Explain the ecological importance of the significant predictors, or lack of significant predictors.
 
 #Kalium, and Ca, along with Total P, proved to be the most significant predictor in plant species sucess across differnt land types, meaning that these abiotic nutrients have the biggest impact on whichevr plant is able to utilize them most, making them thrive more than others.
-
+#...Making them grow taller?
 abiotic.tibble <- read_excel("Penaetal_2016_data.xlsx", sheet = "Abiotic factors")
 abiotic <- as.data.frame(abiotic.tibble)
 
@@ -90,8 +90,9 @@ plot(mod1$residuals)
 
 # (Q3 - 6 pts) Provide a 3-4 sentence synthesis of how these results relate to one another and the value of considering both together for interpreting biotic-abiotic interactions.
 
-#Based off the interactions ive witnessed in running these models, I have found that the most significant abiotic factors in determining a plants successful is Kalium, and Ca.
+#Based off the interactions ive witnessed in running these models, I have found that the most significant abiotic factors in determining a plants successful is Kalium, and Ca. #and P
 #they had the most significant correlation between plant success across the tested species of plants put of all abiotic factors included within this experiment
 #based on the eigenvalues we see a decent amount of variability in the success of the plant species tested without the presence of abiotic factors.
 #not gonna lie i am still very confused on question 1
+  #We can walk through it together if you want.
 
