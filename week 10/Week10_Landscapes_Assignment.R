@@ -218,7 +218,7 @@ plot_smooth(gam.mod, view="Alk", rm.ranef=FALSE, ylab = "", xlab = "Specific Con
   #In prep for that, find one data source to compare with either the data in dbfishR OR DataRetrieval. (5 pts)
 
 getwd()
-setwd("C:/Users/13216/OneDrive - Susquehanna University/Desktop/joyse/week 10")
+setwd("C:/GitHub/joyse/week 10")
 
 read.csv("Population_Genetics_Wild_Brook_Trout_North_Carolina_1998_2016 (1).csv")
 
