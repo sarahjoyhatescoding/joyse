@@ -5,7 +5,7 @@ setwd("C:/GitHub/joyse/Final Project")
 #Apologize in advance for the temperature, and goats headers being so long and in your face, it helps me visualize
   #where different parts of the code begin as ai work on different sections
 
-#TEMPERATUREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+#TEMPERATURE---------------------------------------------------------------------------------------------------------------------------
 
 #make a data frame out of my temperature and precipitation over the years
 Temp<-read.csv("acrc_USW00025309_annual_temp_1732196294437.csv", header=FALSE)
@@ -14,15 +14,19 @@ temp<- as.data.frame(abiotic.tibble)
 
 temps <- temp[-1:-4,]
 
-library(dplyr)
-library(stringr)
 
-# Create a new column called 'Temp_Ratio'
+#CHANGING THE COLUMN NAMES
 
-df$Temp_Ratio <- temps$`Annual Maximum Temperature (degF)` /temps$Year
+# Use the first row as column names
+colnames(temps) <- temps[1, ]
+
+# Remove the first row (now used as column names)
+temperature <- temps[-1, ]
 
 
-#GOATSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+
+#GOATS
+#-----------------------------------------------------------------------------------------------------------------------------------------------------
 
 #make a data frame out of individual goat mortality
 read.csv("mtn_goat_invdividual_mortality_db_final_2023_0625.csv")
@@ -36,17 +40,116 @@ goats <- as.data.frame(goats.tibble)
   #all correspond to their dates, total deaths increase as time goes on
 goats$new_column <- (goats$cumulative_deaths <- cumsum(goats$Avalanche_Mort))
 
+
 #divide this by 258, which is the total number of goats in this study to create a ratio, then multiply by 100
   #so we have a percentage so itll be easier to understand
 goats$life_ratio <- goats$cumulative_deaths / 258*100
 
+#Now were getting the exact year the goats have dies because it is a lot easier to format that into a graph
+  #and it will fit better in the year data when paired against the temperature data set
+
+install.packages("stringr")
+library(stringr)
+
+# Add a new column with the year after the '/'
+goats$Year <- sapply(str_split(goats$Year_Death, "/"), function(x) x[2])
+
+
+#okay things got funky becuase multiple goats would die in the same year which messed up the merged data so were
+  #gonna have to add all cumulative deaths per year and compare them to those years
+
+# Summarize cumulative deaths by year
+yearly_cumulative_deaths <- aggregate(cumulative_deaths ~ Year, data = goats, max)
+#okay now were adding a new column to this new goat data set to create the life ratio pt. 2 
+yearly_cumulative_deaths$life_ratio <- yearly_cumulative_deaths$cumulative_deaths / 258*100
+
+#okay things got real funky, so i need to change some things manually
+yearly_cumulative_deaths[1,1] <- 2005
+yearly_cumulative_deaths[16,2] <- 82
+yearly_cumulative_deaths[17,2] <- 87
+yearly_cumulative_deaths[18,2] <- 93
+
+#now redo this
+yearly_cumulative_deaths$life_ratio <- yearly_cumulative_deaths$cumulative_deaths / 258*100
+
+
+#Merging the two data sources --------------------------------------------------------------------------------------------
+
+# Select only the columns of interest
+temp_selected <- temperature[, c("Year", "Annual Average Temperature (degF)")]
+goat_selected <- yearly_cumulative_deaths[, c("Year", "life_ratio")]
+
+# Merge the two datasets by "Year"
+combined_data <- merge(temp_selected, goat_selected, by = "Year")
+
+#FINALLY plot that sucker
+#first goat deaths by year
+
+plot(yearly_cumulative_deaths$Year, yearly_cumulative_deaths$cumulative_deaths, #------------soemthing seems off with cumulative deaths in 2011
+     main = "Plot of Year vs Cumulative Deaths",
+     xlab = "Year",
+     ylab = "# of Deaths",
+     col = "blue",  # Change color
+     xlim = c(2005, 2022),  # Set y-axis limits
+     ylim = c(0, 100))  # Set y-axis limits)  
+
+#second temperature by year
+plot(temperature$Year, temperature$`Annual Average Temperature (degF)`,
+     main = "Plot of Year vs Average Temp",
+     xlab = "Year",
+     ylab = "Average Temp",
+     col = "blue",  # Change color
+     xlim = c(2005, 2022),  # Set y-axis limits
+     ylim = c(40, 45))  # Set y-axis limits) 
+
+#third goats by temperature --------------------------------------------------------- Havinbg some issues wiht this
+plot(combined_data$`Annual Average Temperature (degF)`, combined_data$life_ratio,
+     main = "Plot of Average Temperature vs Life Ratio of Mountain Goats",
+     xlab = "Average Temp",
+     ylab = "Life Ratio",
+     col = "blue",  # Change color
+     xlim = c(2005, 2022),  # Set y-axis limits
+     ylim = c(0, 50))  # Set y-axis limits)  
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Archive, things that didnt work out but im keeping them just in case
+
+#for temp ------------------------------------------------------------------------------------------------------------------
+
+# Create a new column called 'Temp_Ratio' <---------------------------------------
+#probably dont need but will keep just incase
+
+temperature$Temp_Ratio <- temperature$`Annual Average Temperature (degF)` /temperature$Year
+
+
+#for goats---------------------------------------------------------------------------------------------------------------------------
 #plot this number over time
   #theoretically number of deaths will increase over time
 #set date to make sure it works in plot
-goats$Date_Death <-as.date(goats$Date_Death, "%m/%d%Y")
+goats$Date_Death <-as.date(goats$Date_Death, "%m/%d%Y") 
+#^that ones real funky
 
 
 plot(goats$Date_Death, goats$life_ratio,
