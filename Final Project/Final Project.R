@@ -69,8 +69,26 @@ yearly_cumulative_deaths[16,2] <- 82
 yearly_cumulative_deaths[17,2] <- 87
 yearly_cumulative_deaths[18,2] <- 93
 
+#okay now you looked at my code and everything seemed alright but there was an abnormally large jump
+  #in deaths, and then the cumulative went down and back up again, so i just manually put in the rest
+yearly_cumulative_deaths[7,2] <- 14
+yearly_cumulative_deaths[8,2] <- 20
+yearly_cumulative_deaths[9,2] <- 29
+yearly_cumulative_deaths[10,2] <- 34
+yearly_cumulative_deaths[11,2] <- 39
+yearly_cumulative_deaths[12,2] <- 42
+yearly_cumulative_deaths[13,2] <- 55
+yearly_cumulative_deaths[14,2] <- 63
+yearly_cumulative_deaths[15,2] <- 66
+yearly_cumulative_deaths[16,2] <- 78
+yearly_cumulative_deaths[17,2] <- 86
+yearly_cumulative_deaths[18,2] <- 93
+  
+  
+  
 #now redo this
 yearly_cumulative_deaths$life_ratio <- yearly_cumulative_deaths$cumulative_deaths / 258*100
+print (yearly_cumulative_deaths)
 
 
 #Merging the two data sources --------------------------------------------------------------------------------------------
