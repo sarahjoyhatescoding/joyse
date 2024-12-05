@@ -25,8 +25,7 @@ temperature <- temps[-1, ]
 
 
 
-#GOATS
-#-----------------------------------------------------------------------------------------------------------------------------------------------------
+#GOATS-----------------------------------------------------------------------------------------------------------------------------------------------------
 
 #make a data frame out of individual goat mortality
 read.csv("mtn_goat_invdividual_mortality_db_final_2023_0625.csv")
@@ -63,7 +62,8 @@ yearly_cumulative_deaths <- aggregate(cumulative_deaths ~ Year, data = goats, ma
 #okay now were adding a new column to this new goat data set to create the life ratio pt. 2 
 yearly_cumulative_deaths$life_ratio <- yearly_cumulative_deaths$cumulative_deaths / 258*100
 
-#okay things got real funky, so i need to change some things manually
+#okay things got real funky, so i need to change some things manually. the Year 2005, had said it was 1013? and
+  #and my cumulative deaths shouldnt have decreased so i reordered the numbers
 yearly_cumulative_deaths[1,1] <- 2005
 yearly_cumulative_deaths[16,2] <- 82
 yearly_cumulative_deaths[17,2] <- 87
@@ -103,7 +103,7 @@ combined_data <- merge(temp_selected, goat_selected, by = "Year")
 #FINALLY plot that sucker
 #first goat deaths by year
 
-plot(yearly_cumulative_deaths$Year, yearly_cumulative_deaths$cumulative_deaths, #------------soemthing seems off with cumulative deaths in 2011
+plot(yearly_cumulative_deaths$Year, yearly_cumulative_deaths$cumulative_deaths,
      main = "Plot of Year vs Cumulative Deaths",
      xlab = "Year",
      ylab = "# of Deaths",
@@ -120,22 +120,87 @@ plot(temperature$Year, temperature$`Annual Average Temperature (degF)`,
      xlim = c(2005, 2022),  # Set y-axis limits
      ylim = c(40, 45))  # Set y-axis limits) 
 
-#third goats by temperature --------------------------------------------------------- Havinbg some issues wiht this
+#third goats by temperature 
 plot(combined_data$`Annual Average Temperature (degF)`, combined_data$life_ratio,
      main = "Plot of Average Temperature vs Life Ratio of Mountain Goats",
      xlab = "Average Temp",
      ylab = "Life Ratio",
      col = "blue",  # Change color
-     xlim = c(2005, 2022),  # Set y-axis limits
-     ylim = c(0, 50))  # Set y-axis limits)  
+     xlim = c(40, 45),  # Set y-axis limits
+     ylim = c(0,40))  # Set y-axis limits)  
+
+#try and add trend lines to this <---------------------------------------------------------
 
 
 
 
 
+#Analysis time baby ------------------------------------------------------------------------------------------------------------------------
+  #need to first convert the values of temp to be numeric becuase they werent before
+str(combined_data)
+class(combined_data) #<--------------- need help withthe as.numeric
+combined_data[, "Annual Average Temperature (degF)"] <- as.numeric(combined_data[, "Annual Average Temperature (degF)"])
+colnames(combined_data)
+str(combined_data)
+
+# Fit the linear model
+model <- lm(life_ratio ~ `Annual Average Temperature (degF)`, data = combined_data)
+
+# View the summary of the model
+summary(model)
+  #Residual standard error: 12.5 on 3 degrees of freedom
+  #Multiple R-squared:  0.8134,	Adjusted R-squared:  -0.05739 
+  #F-statistic: 0.9341 on 14 and 3 DF,  p-value: 0.6068
+    #not statistically signifacnt
+library(ggplot2)
+
+# Scatterplot with linear regression line
+ggplot(combined_data, aes(x = `Annual Average Temperature (degF)`, y = life_ratio)) +
+  geom_point(color = "blue") +
+  geom_smooth(method = "lm", color = "red") +
+  ggtitle("Linear Regression Analysis") +
+  xlab("Annual Average Temperature (degF)") +
+  ylab("Life Ratio")
+
+plot(`Annual Average Temperature (degF)`, life_ratio, data = combined_data) 
+
+abline(model)
 
 
 
+
+
+plot(combined_data$`Annual Average Temperature (degF)`, combined_data$life_ratio, main = "Scatter plot with abline()")
+model <- lm(y ~ x, data = combined_data)
+abline(model, col = "red")  
+
+
+
+
+
+#AIC index
+# Fit the linear regression model
+AIC_model <- lm(life_ratio ~ `Annual Average Temperature (degF)`, data = combined_data)
+AIC(AIC_model)
+
+# Calculate AIC for the model
+aic_value <- AIC(model)
+print(aic_value)
+  #142.5098
+
+#GLM
+# Fit a GLM
+
+combined_data[, "Annual Average Temperature (degF)"] <- as.numeric(combined_data[, "Annual Average Temperature (degF)"])
+colnames(combined_data)
+str(combined_data)
+
+glm_model <- glm(life_ratio ~ `Annual Average Temperature (degF)`, 
+                 data = combined_data, 
+                 family = gaussian(link = "identity"))
+
+# Summary of the GLM model
+summary(glm_model)
 
 
 
