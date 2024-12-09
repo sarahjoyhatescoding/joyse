@@ -136,9 +136,11 @@ plot(combined_data$`Annual Average Temperature (degF)`, combined_data$life_ratio
 
 
 #Analysis time baby ------------------------------------------------------------------------------------------------------------------------
-  #need to first convert the values of temp to be numeric becuase they werent before
+  #mind you this is all for goat life ratio versus temp
+  #this may have takena  few extra steps but it was a learning process and all were necessary for me to get to this point
+  #need to first convert the values of temp to be numeric because they werent before
 str(combined_data)
-class(combined_data) #<--------------- need help withthe as.numeric
+class(combined_data)
 combined_data[, "Annual Average Temperature (degF)"] <- as.numeric(combined_data[, "Annual Average Temperature (degF)"])
 colnames(combined_data)
 str(combined_data)
@@ -161,20 +163,7 @@ ggplot(combined_data, aes(x = `Annual Average Temperature (degF)`, y = life_rati
   ggtitle("Linear Regression Analysis") +
   xlab("Annual Average Temperature (degF)") +
   ylab("Life Ratio")
-
-plot(`Annual Average Temperature (degF)`, life_ratio, data = combined_data) 
-
-abline(model)
-
-
-
-
-
-plot(combined_data$`Annual Average Temperature (degF)`, combined_data$life_ratio, main = "Scatter plot with abline()")
-model <- lm(y ~ x, data = combined_data)
-abline(model, col = "red")  
-
-
+#red line from plot above is the trendline with the grey being the confidence interval
 
 
 
@@ -206,93 +195,33 @@ summary(glm_model)
 
 
 
+#Now doing a GLM on cumulative deaths versus year
+  #need to contunue the as.numeric because R keeps trying to get sassy with me
 
+yearly_cumulative_deaths[, "Year"] <- as.numeric(yearly_cumulative_deaths[, "Year"])
+colnames(yearly_cumulative_deaths)
+str(yearly_cumulative_deaths)
 
+glm_goats <- glm(cumulative_deaths ~ Year, 
+                 data = yearly_cumulative_deaths, 
+                 family = gaussian(link = "identity"))
+summary(glm_goats)
 
 
+#Now doing a GLM on temps versus year
+  #can used combined data for this because has avg temps and year
+  #again continue with as.numeric
 
+combined_data[, "Annual Average Temperature (degF)"] <- as.numeric(combined_data[, "Annual Average Temperature (degF)"])
+colnames(combined_data)
+str(combined_data)
 
+combined_data[, "Year"] <- as.numeric(combined_data[, "Year"])
+colnames(combined_data)
+str(combined_data)
 
 
-
-
-
-#Archive, things that didnt work out but im keeping them just in case
-
-#for temp ------------------------------------------------------------------------------------------------------------------
-
-# Create a new column called 'Temp_Ratio' <---------------------------------------
-#probably dont need but will keep just incase
-
-temperature$Temp_Ratio <- temperature$`Annual Average Temperature (degF)` /temperature$Year
-
-
-#for goats---------------------------------------------------------------------------------------------------------------------------
-#plot this number over time
-  #theoretically number of deaths will increase over time
-#set date to make sure it works in plot
-goats$Date_Death <-as.date(goats$Date_Death, "%m/%d%Y") 
-#^that ones real funky
-
-
-plot(goats$Date_Death, goats$life_ratio,
-     main = "Plot of Date_Death vs life_ratio",
-     xlab = "Date",
-     ylab = "life ratio",
-     col = "blue",  # Change color
-     xlim = as.Date(c("2006-02-10", "2022-01-04"))  # Set y-axis limits
-     ylim = c(0, 100))  # Set y-axis limits)  
-
-?POSIXt
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+glm_temps <- glm(`Year` ~ `Annual Average Temperature (degF)`, 
+                 data = combined_data, 
+                 family = gaussian(link = "identity"))
+summary(glm_temps)
