@@ -1,10 +1,10 @@
 #Final project
 #get everything organized under the right folder
 getwd()
-setwd("C:/GitHub/joyse/Final Project")
+setwd("C:/GitHub/joyse/Final Project/data sheets")
 #Apologize in advance for the temperature, and goats headers being so long and in your face, it helps me visualize
   #where different parts of the code begin as ai work on different sections
-
+#working directory set to the wrong place.
 #TEMPERATURE---------------------------------------------------------------------------------------------------------------------------
 
 #make a data frame out of my temperature and precipitation over the years
@@ -154,6 +154,7 @@ summary(model)
   #Multiple R-squared:  0.8134,	Adjusted R-squared:  -0.05739 
   #F-statistic: 0.9341 on 14 and 3 DF,  p-value: 0.6068
     #not statistically signifacnt
+#Your comments here don't match the results I got. For me it was *almost* significant!
 library(ggplot2)
 
 # Scatterplot with linear regression line
@@ -190,7 +191,7 @@ glm_model <- glm(life_ratio ~ `Annual Average Temperature (degF)`,
 
 # Summary of the GLM model
 summary(glm_model)
-
+#This is exactly the same as the standard lm() output because you used a normal distribution and the same y~x.
 
 
 
@@ -206,7 +207,7 @@ glm_goats <- glm(cumulative_deaths ~ Year,
                  data = yearly_cumulative_deaths, 
                  family = gaussian(link = "identity"))
 summary(glm_goats)
-
+#Think about this...it must be a strong relationship because deaths can only go up over time. Unless we have zombie goats, which would be cool.
 
 #Now doing a GLM on temps versus year
   #can used combined data for this because has avg temps and year
@@ -225,3 +226,4 @@ glm_temps <- glm(`Year` ~ `Annual Average Temperature (degF)`,
                  data = combined_data, 
                  family = gaussian(link = "identity"))
 summary(glm_temps)
+#This is a good/sad one to do!
